@@ -3,12 +3,13 @@ package com.company;
 import java.util.Arrays;
 
 public class Main {
+
     public static void main(String[] args) {
         //task1();
         //task2();
         //task3();
         //task4();
-        //task5();
+        task5();
     }
 
 
@@ -84,6 +85,7 @@ public class Main {
      */
     private static void task3() {
         //init
+        final int DIVIDER = 5;
         byte checkMultiplicity = 0;
         int removedElementPosition = 0;
         final int lengthOfSource = 25;
@@ -97,19 +99,20 @@ public class Main {
         System.out.println("Source array -> " + Arrays.toString(sourceArray));
 
         //search elements(%5 == 0) + remove
-        for (int i = 0; i < sourceArray.length; i++) {
-            if ((sourceArray[i] % 5) == 0) {
-                removedElementPosition = (i + 1);
+        for (int i = sourceArray.length - 1; i >= 0; i--) {
+            if ((sourceArray[i] % DIVIDER) == 0) {
+                removeElement(sourceArray, (i + 1));
                 checkMultiplicity = 1;
+                break;
             }
         }
 
+
         //remove element
-        if ((checkMultiplicity == 1)) {
-            removeElement(sourceArray, removedElementPosition);
-            System.out.println("Output array -> " + (Arrays.toString(sourceArray)));
-        } else {
+        if (checkMultiplicity == 0) {
             System.out.println("No elements multiple of 5");
+        } else {
+            System.out.println("New array -> " + Arrays.toString(sourceArray));
         }
     }
 
@@ -196,7 +199,7 @@ public class Main {
         maxDistanceDotY1 = yCoordinates[0];
         maxDistanceDotY2 = yCoordinates[1];
         for (int i = 0; i < (xCoordinates.length); i++) {
-            for (int j = 0; j < (xCoordinates.length); j++) {
+            for (int j = (i + 1); j < (xCoordinates.length); j++) {
                 if (maxDistance < ((float) (Math.sqrt(((xCoordinates[j] - xCoordinates[i]) * (xCoordinates[j] - xCoordinates[i])) + ((yCoordinates[j] - yCoordinates[i]) * (yCoordinates[j] - yCoordinates[i])))))) {
                     maxDistance = ((float) (Math.sqrt(((xCoordinates[j] - xCoordinates[i]) * (xCoordinates[j] - xCoordinates[i])) + ((yCoordinates[j] - yCoordinates[i]) * (yCoordinates[j] - yCoordinates[i])))));
                     maxDistanceDotX1 = xCoordinates[i];
